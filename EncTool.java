@@ -171,12 +171,13 @@ public class EncTool {
             //Set up the AES Key & cipher object in CTR mode
             SecretKeySpec secretKeySpec = new SecretKeySpec(hexStringToByteArray(hexKey), "AES");
             Cipher encAESCTRcipher = Cipher.getInstance("AES/CTR/PKCS5Padding");
-            SecureRandom random = new SecureRandom();
+
             byte iv[] = new byte[16];
             for(int i = 0 ; i<16;i++){
                 iv[i] = plainText[i];
             }
             byte data[] = new byte[16];
+
             for(int i =0;i<16;i++){
                 data[i] = plainText[16+i];
             }
@@ -184,6 +185,12 @@ public class EncTool {
             encAESCTRcipher.init(javax.crypto.Cipher.DECRYPT_MODE,secretKeySpec,ivSpec);
             byte [] outt = encAESCTRcipher.doFinal(data);
             System.out.println("this is anseer?:\n"+outt);
+            System.out.println("Openning file to write: "+outFile);
+            FileOutputStream outToFile = new FileOutputStream(outFile);
+
+            outToFile.write(outt);
+            outToFile.close();
+            System.out.println(inFile+" encrypted as "+outFile);
         }
         catch(Exception e){}
     }
