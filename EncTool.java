@@ -177,7 +177,7 @@ public class EncTool {
                 iv[i] = plainText[i];
             }
             byte data[] = new byte[16];
-
+            System.out.println("length is:"+data.length);
             for(int i =0;i<16;i++){
                 data[i] = plainText[16+i];
             }
