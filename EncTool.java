@@ -24,7 +24,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 
 public class EncTool {
-    static int BLOCK_SIZE_BYTES = 16
+    static int BLOCK_SIZE_BYTES = 16;
     static String inFile = "plainText.txt";
     static String outFile = "cipherText.enc";
     static String hexKey="3eafda76cd8b015641cb946708675423";
@@ -177,7 +177,7 @@ public class EncTool {
             IvParameterSpec ivSpec = new IvParameterSpec(iv);
             encAESCTRcipher.init(javax.crypto.Cipher.DECRYPT_MODE,secretKeySpec,ivSpec);
             byte [] outt = encAESCTRcipher.doFinal(plainText,16,plainText.length-16);
-            System.out.println();
+            System.out.println("this is anseer?:\n"+outt);
         }
         catch(Exception e){}
     }
