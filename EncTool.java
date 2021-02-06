@@ -173,33 +173,20 @@ public class EncTool {
             Cipher encAESCTRcipher = Cipher.getInstance("AES/CTR/PKCS5Padding");
             SecureRandom random = new SecureRandom();
             byte iv[] = new byte[16];
-            random.nextBytes(iv);
+            for(int i = 0 ; i<16;i++){
+                iv[i] = plainText[i];
+            }
+            byte data[] = new byte[16];
+            for(int i =0;i<16;i++){
+                data[i] = plainText[16+i];
+            }
             IvParameterSpec ivSpec = new IvParameterSpec(iv);
             encAESCTRcipher.init(javax.crypto.Cipher.DECRYPT_MODE,secretKeySpec,ivSpec);
-            byte [] outt = encAESCTRcipher.doFinal(plainText,16,plainText.length-16);
+            byte [] outt = encAESCTRcipher.doFinal(data);
             System.out.println("this is anseer?:\n"+outt);
         }
         catch(Exception e){}
     }
-
-//    public byte[] decrypt(byte[] data, int offset, SecretKeySpec m_keySpec) throws Exception
-//    {
-//        //check if there is data to decrypt after the offset and iv
-//        if(data.length <= BLOCK_SIZE_BYTES + offset)
-//        {
-//            throw new Exception("No data to decrypt");
-//        }
-//
-//        //get iv value from the beggining of data
-//        byte[] iv = new byte[BLOCK_SIZE_BYTES];
-//        System.arraycopy(data, offset, iv, 0, BLOCK_SIZE_BYTES);
-//
-//        //init cipher instance
-//        m_cipher.init(javax.crypto.Cipher.DECRYPT_MODE, m_keySpec, new IvParameterSpec(iv));
-//
-//        //return decrypted value
-//        return m_cipher.doFinal(data, (BLOCK_SIZE_BYTES + offset), data.length - (BLOCK_SIZE_BYTES + offset));
-//    }
 
 
     private static void encryptAESCTR() {
